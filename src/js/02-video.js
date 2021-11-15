@@ -11,16 +11,15 @@ player.getVideoTitle().then(function (title) {
   console.log('title:', title);
 });
 
+let iframeDataStringify = {};
 const onPlay = function (data) {
-  localStorage.setItem('videoplayer-current-time', JSON.stringify(data));
+  iframeDataStringify = localStorage.setItem('videoplayer-current-time', JSON.stringify(data));
+  return iframeDataStringify;
 };
 
 const iframeData = localStorage.getItem('videoplayer-current-time');
-console.log(iframeData);
 const parsedIframeData = JSON.parse(iframeData);
-console.log(parsedIframeData);
 const currentTime = parsedIframeData.seconds;
-console.log(currentTime);
 
 player
   .setCurrentTime(currentTime)
