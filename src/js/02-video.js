@@ -18,8 +18,11 @@ const onPlay = function (data) {
 };
 
 const iframeData = localStorage.getItem('videoplayer-current-time');
-const parsedIframeData = JSON.parse(iframeData);
-const currentTime = parsedIframeData.seconds;
+let currentTime = 0;
+if (iframeData) {
+  const parsedIframeData = JSON.parse(iframeData);
+  currentTime = parsedIframeData.seconds;
+}
 
 player
   .setCurrentTime(currentTime)
