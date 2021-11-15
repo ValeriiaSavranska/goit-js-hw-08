@@ -2,12 +2,12 @@ import Player from '@vimeo/player';
 import throttle from 'lodash.throttle';
 
 const iframeRef = document.querySelector('iframe');
-const iframePlayer = new Vimeo.Player(iframeRef);
+const player = new Vimeo.Player(iframeRef);
 
-iframePlayer.on('play', function () {
+player.on('play', function () {
   console.log('played the video!');
 });
-iframePlayer.getVideoTitle().then(function (title) {
+player.getVideoTitle().then(function (title) {
   console.log('title:', title);
 });
 
@@ -16,10 +16,13 @@ const onPlay = function (data) {
 };
 
 const iframeData = localStorage.getItem('videoplayer-current-time');
+console.log(iframeData);
 const parsedIframeData = JSON.parse(iframeData);
+console.log(parsedIframeData);
 const currentTime = parsedIframeData.seconds;
+console.log(currentTime);
 
-iframePlayer
+player
   .setCurrentTime(currentTime)
   .then(function (seconds) {
     // seconds = the actual time that the player seeked to
@@ -36,4 +39,4 @@ iframePlayer
     }
   });
 
-iframePlayer.on('timeupdate', throttle(onPlay, 1000));
+player.on('timeupdate', throttle(onPlay, 1000));
